@@ -16,7 +16,7 @@ public class HuffmanTree {
 		ArrayList<Node> arr = new ArrayList<Node>();
 		Scanner scan = new Scanner(System.in);
 		while(scan.hasNextInt()){
-			arr.add(new Node(scan.nextInt()));
+			arr.add(new Node(scan.nextInt()));                     //输入用于构造Huffman树的叶节点
 
 		}
 		HuffmanTree ht = new HuffmanTree(arr);
@@ -85,7 +85,7 @@ public class HuffmanTree {
 	     }
 	     arr.remove(q);
 	    
-	     int pelement = left.element+right.element;
+	     int pelement = left.element+right.element;  
 	     parent = new Node(pelement);
 	     left.parent = parent;
 	     right.parent = parent;
