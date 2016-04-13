@@ -86,3 +86,99 @@ public class XuanJu {
 	}
 
 }
+
+
+/**
+ * 判断三子棋输赢
+ * 有A，B两个人，A在棋盘画‘X’，B在棋盘画‘0’。开局时A先画，其次是B。
+ * 给定任意一个棋局要求判断谁赢，或者下一步该谁走，或者是平局，或者棋局不合理
+ */
+import java.util.Scanner;
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner scan = new Scanner(System.in);
+		char[][] ch = new char[3][3];
+	    String[] str = new String[3];
+	    while(scan.hasNext()){
+        for(int i=0;i<3;i++)
+	       str[i] = scan.next();
+	   
+	    
+
+	    for(int p=0;p<3;p++)
+	    	for(int q=0;q<3;q++){
+	    		ch[p][q] = str[p].charAt(q);
+	    	}
+	    
+	    int anum=0,bnum=0,cnum=0; //anum表示A在棋盘中的棋子数，bnum表示B在棋盘中的棋子数，cnum表示棋盘中空格数
+	    for(int p=0;p<3;p++)
+	    	for(int q=0;q<3;q++){
+	    		if(ch[p][q]=='X'){
+	    			anum++;
+	    		}else if(ch[p][q]=='0'){
+	    			bnum++;
+	    		}else{
+	    			cnum++;
+	    		}
+	    	}
+	    
+	    if(Math.abs(anum-bnum)>1){
+	    	System.out.println("输入棋局不合法");     //输入棋局不合法
+	    }else{
+	    	if(anum>bnum){
+	    		if(isWon('X',ch)){
+	    			System.out.println("x won");   //A赢
+	    		}else if(cnum==0){
+	    			System.out.println("dow");     //平局
+	    		}else{
+	    			System.out.println("0 run");   //下一步B先走
+	    		}
+	    	}else{
+	    		if(isWon('0',ch)){
+	    			System.out.println("0 won");  //B赢
+	    		}else if(cnum==0){
+	    			System.out.println("dow");   //平局
+	    		}else{
+	    			System.out.println("x run");  //下一步A先走
+	    		}
+	    		
+	    	}
+	    	
+	    }
+	    
+	    
+	 }		
+     scan.close();
+	}
+	
+   /**
+    * 判断哪一个赢
+    * @param t  表示‘0’或‘X’
+    * @param ch 当前棋局
+    * @return
+    */
+	
+	public static boolean isWon(char t,char[][] ch){
+		for(int i=0;i<3;i++){
+			if(ch[i][0]==t &&ch[i][1]==t &&ch[i][2]==t )
+				return true;
+		}
+		
+		for(int j=0;j<3;j++){
+			if(ch[0][j]==t &&ch[1][j]==t &&ch[2][j]==t )
+				return true;
+		}
+		
+		if(ch[0][0]==t &&ch[1][1]==t &&ch[2][2]==t )
+			return true;
+		
+		if(ch[0][2]==t &&ch[1][1]==t &&ch[2][0]==t )
+			return true;
+		
+		return false;
+	}
+
+}
